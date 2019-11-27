@@ -4,12 +4,24 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
+//LOWDB
+const low = require("lowdb");
+const FileSync = require("lowdb/adapters/FileSync");
+
+const adapter = new FileSync("db.json");
+const db = low(adapter);
+//shortid
+var shortid = require("shortid");
 /** ROUTERS */
 const indexRouter = require("./routes/index");
 const apiRouter = require("./routes/api");
 
 /** INIT */
 const app = express();
+
+db.defaults({
+  records: []
+}).write();
 
 /** LOGGING */
 app.use(logger("dev"));
