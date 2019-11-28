@@ -12,18 +12,18 @@ exports.getRecords = (req, res, next) => {
   res.send(result);
   next();
 };
-exports.pushRecord = (req, res, next) => {
+exports.postRecord = (req, res, next) => {
   db.get("records")
     .push({
       id: shortid.generate(),
-      title: "NEW1",
-      artist: "NEW1",
-      year: 2020,
-      image: "www.",
-      price: 2929
+      title: req.body.title,
+      artist: req.body.artist,
+      year: req.body.year,
+      image: req.body.image,
+      price: req.body.price
     })
     .write();
-  res.send("posted");
+  res.send("updated");
   next();
 };
 exports.getRecordsId = (req, res, next) => {
