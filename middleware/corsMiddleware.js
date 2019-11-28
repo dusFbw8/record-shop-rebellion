@@ -1,4 +1,4 @@
-const middle = (req, res, next) => {
+const cors = (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "*");
   if (req.method === "OPTIONS") {
@@ -7,4 +7,4 @@ const middle = (req, res, next) => {
   }
   next();
 };
-module.exports = middle;
+module.exports = cors;
