@@ -39,6 +39,16 @@ app.use(express.static(path.join(__dirname, "public")));
 /** ROUTES */
 app.use("/", indexRouter);
 app.use("/api", apiRouter);
+//ERROR
 
+app.use((req, res, next) => {
+  const error = new Error("Database error");
+  error.status = 400;
+  next(error);
+});
+app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send(err.message);
+});
 /** EXPORT PATH */
 module.exports = app;
